@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import AdvUser
 
 class AdvUserAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'username', 'email')
+    list_display = ('full_name', 'username', 'email', 'status')
 
     readonly_fields = ( 'username', 'first_name', 'last_name', 'full_name', 'date_joined')
 

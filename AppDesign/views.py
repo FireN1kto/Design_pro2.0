@@ -1,3 +1,4 @@
+from django.contrib.auth.middleware import get_user
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
@@ -15,6 +16,11 @@ def index(request):
 
 class BBLoginView(LoginView):
     template_name = 'catalog/login.html'
+    def form_valid(self, form):
+        user=form.get_user()
+        user.status='online'
+        user.save()
+        return super().form_valid(form)
 
 class BBLogoutView(LoginRequiredMixin, LogoutView):
     template_name = 'catalog/logout.html'
