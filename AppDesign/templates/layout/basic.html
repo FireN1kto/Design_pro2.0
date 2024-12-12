@@ -32,7 +32,7 @@
                 </div>
             {% else %}
                 <div class="navigation">
-                    <a href="#">Регистрация</a>
+                    <a href="{% url 'catalog:register' %}">Регистрация</a>
                     <a href="{% url 'catalog:login' %}">Вход</a>
                 </div>
             {% endif %}
