@@ -148,3 +148,40 @@ main > div > div {
     border: none;
     transition: background,color 0.2s ease-in;
 }
+
+.dropdown-menu {
+    text-align: center;
+    background: black;
+}
+
+.dropdown-menu > a {
+    background: black;
+    color: #32982F;
+    font-weight: bold;
+}
+
+.dropdown-menu > a:hover {
+    background: #32982F;
+    color: black;
+}
+
+.dropdown-menu > a:active {
+    background: black;
+    color: white;
+}
+
+.dropdown-menu > form > button[type="submit"] {
+    background: black;
+    color: #32982F;
+    font-weight: bold;
+}
+
+.dropdown-menu > form > button[type="submit"]:hover {
+    background: #32982F;
+    color: black;
+}
+
+.dropdown-menu > form > button[type="submit"]:active {
+    background: black;
+    color: white;
+}
