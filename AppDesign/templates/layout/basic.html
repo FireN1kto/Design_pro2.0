@@ -16,12 +16,12 @@
             {% if user.is_authenticated %}
                 <div class="navigation">
                     <a href="{% url 'AppDesign:index' %}">Главная</a>
-                    <a class="nav-link dropdown-toggle" href="{% url 'catalog:profile' %}" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Профиль</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Мои заявки</a>
+                        <a class="dropdown-item" href="{% url 'catalog:profile' %}">Мои заявки</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Создать заявки</a>
+                        <a class="dropdown-item" href="{% url 'catalog:create_requests' %}">Создать заявки</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Удалить заявки</a>
                         <form action="{% url 'catalog:logout' %}" method="post"><div class="dropdown-divider"></div>

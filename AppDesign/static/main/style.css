@@ -128,6 +128,14 @@ main > div > div {
     padding-left: 20px;
 }
 
+.request-urgent {
+    padding-left: 20px;
+}
+
+.request-urgent > span {
+    font-weight: bold;
+}
+
 .request-image > img {
     width: 100%;
     height: 400px;

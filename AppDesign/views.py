@@ -1,18 +1,20 @@
 from django.contrib.auth.middleware import get_user
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
-from .forms import RegisterUserForm
-from .models import AdvUser
+from .forms import RegisterUserForm, InteriorDesignRequestForm
+from .models import AdvUser, InteriorDesignRequest
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
+from django.contrib import messages
 
 
 def index(request):
-    return render(request, 'catalog/index.html')
+    requests = InteriorDesignRequest.objects.all()
+    return render(request, 'catalog/index.html', {'requests': requests})
 
 class BBLoginView(LoginView):
     template_name = 'catalog/login.html'
@@ -27,7 +29,8 @@ class BBLogoutView(LoginRequiredMixin, LogoutView):
 
 @login_required
 def profile(request):
-    return render(request, 'catalog/profile.html')
+    user_requests = InteriorDesignRequest.objects.filter(user=request.user)
+    return render(request, 'catalog/profile.html', {'user_requests': user_requests})
 
 class RegisterUserView(CreateView):
     model = AdvUser
@@ -37,3 +40,31 @@ class RegisterUserView(CreateView):
 
 class RegisterDoneView(TemplateView):
     template_name = 'catalog/register_done.html'
+
+
+def create_request(request):
+    if request.user.is_staff:
+        messages.error(request, "Администраторы не могут создавать заявки.")
+        return redirect('catalog:profile')
+
+    if not request.user.is_active:
+        messages.error(request, "Вы не можете создавать заявки до активации.")
+        return redirect('catalog:profile')
+
+    if request.method == 'POST':
+        form = InteriorDesignRequestForm(request.POST, request.FILES)
+        if form.is_valid():
+            is_urgent = form.cleaned_data.get('is_urgent', False)
+            if is_urgent and InteriorDesignRequest.objects.filter(user=request.user, is_urgent=True).exists():
+                messages.error(request, "Вы уже создали срочную заявку.")
+                return redirect('catalog:create_requests')
+            request_instance = form.save(commit=False)
+            request_instance.user = request.user
+            request_instance.category = form.cleaned_data['new_category'] or form.cleaned_data['category']
+            request_instance.save()
+            messages.success(request, 'Ваша заявка успешно отправлена!')
+            return redirect('catalog:profile')
+    else:
+        form = InteriorDesignRequestForm()
+
+    return render(request, 'catalog/create_requests.html', {'form': form})

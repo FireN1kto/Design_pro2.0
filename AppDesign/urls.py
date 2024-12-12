@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import index, BBLoginView, profile, BBLogoutView, RegisterUserView, RegisterDoneView
+from .views import index, BBLoginView, profile, BBLogoutView, RegisterUserView, RegisterDoneView, create_request
 
 app_name = 'AppDesign'
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path('accounts/logout/', BBLogoutView.as_view(), name='logout'),
     path('accounts/profile/', profile, name='profile'),
     path('accounts/register/', RegisterUserView.as_view(), name='register'),
-    path('accounts/register/done/', RegisterDoneView.as_view(), name='register_done')
+    path('accounts/register/done/', RegisterDoneView.as_view(), name='register_done'),
+    path('create-request', create_request, name='create_requests'),
 ]
