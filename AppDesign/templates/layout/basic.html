@@ -16,7 +16,7 @@
             {% if user.is_authenticated %}
                 <div class="navigation">
                     <a href="{% url 'AppDesign:index' %}">Главная</a>
-                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="{% url 'catalog:profile' %}" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Профиль</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#">Мои заявки</a>
