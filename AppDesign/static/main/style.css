@@ -1,0 +1,150 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #F4D9A3;
+}
+
+.nav-block {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40%;
+    gap: 10%;
+}
+
+.navigation > a {
+    text-decoration: none;
+    color: black;
+}
+
+.navigation > a:hover {
+    font-weight: bold;
+}
+
+.navigation > a:active {
+    color: #32982F;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    width: 50%;
+    margin-left: 25%;
+}
+
+main > form > input[type="submit"] {
+    display: block;
+    background: black;
+    width: 30%;
+    height: 30px;
+    color: white;
+    border-radius:8px;
+    font-weight: bold;
+    border: none;
+    transition: background,color 0.2s ease-in;
+}
+
+main > form > input[type="submit"]:hover {
+    background: #32982F;
+}
+
+main > form > input[type="submit"]:active {
+    background: #32982F;
+    color: black;
+}
+
+main > div > div {
+    display: flex;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    border-radius: 30px;
+    border: solid 2px black;
+    box-shadow: 10px -10px 100px black;
+}
+
+.delete {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+    border-radius: 30px;
+    border: solid 2px black;
+    box-shadow: 10px -10px 100px black;
+}
+
+.request-card > div {
+    width: 60%;
+}
+
+.request-header {
+    font-weight: bold;
+    font-size: 20pt;
+    margin-bottom: 3%;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+
+.request-description {
+    padding-left: 20px;
+}
+
+.request-description > span {
+    font-weight: bold;
+}
+
+.request-category {
+    padding-left: 20px;
+}
+
+.request-category > span {
+    font-weight: bold;
+}
+
+.request-status {
+    font-style: italic;
+    padding-left: 20px;
+}
+
+.request-status > span {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.request-date > span {
+    font-weight: bold;
+}
+
+.request-date {
+    padding-left: 20px;
+}
+
+.request-image > img {
+    width: 100%;
+    height: 400px;
+    border-radius: 40px;
+    padding: 20px
+}
+
+.delete > form > input[type="submit"] {
+    display: block;
+    background: black;
+    margin-left: 35%;
+    margin-bottom: 1%;
+    width: 30%;
+    height: 30px;
+    color: white;
+    border-radius:8px;
+    font-weight: bold;
+    border: none;
+    transition: background,color 0.2s ease-in;
+}
