@@ -2,8 +2,15 @@ from django import forms
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
 from .models import user_registrated, AdvUser
+from .validators import validate_cyrillic
 
 class RegisterUserForm(forms.ModelForm):
+    full_name = forms.CharField(
+        required=True,
+        label='Ф.И.О.',
+        validators=[validate_cyrillic],
+        widget=forms.TextInput()
+    )
     email = forms.EmailField(required=True, label='Адрес электронной почты')
     password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput, help_text=password_validation.password_validators_help_text_html())
     password2 = forms.CharField(label='Пароль (повторно)', widget=forms.PasswordInput, help_text='Повторите тот же самый пароль еще раз')
