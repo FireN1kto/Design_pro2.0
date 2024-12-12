@@ -1,4 +1,3 @@
-from django.contrib.auth.middleware import get_user
 from django.shortcuts import render,redirect
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
@@ -10,6 +9,8 @@ from .models import AdvUser, InteriorDesignRequest
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
+
 
 
 def index(request):
@@ -68,3 +69,18 @@ def create_request(request):
         form = InteriorDesignRequestForm()
 
     return render(request, 'catalog/create_requests.html', {'form': form})
+
+def delete_request(request):
+    user_requests = InteriorDesignRequest.objects.filter(user=request.user)
+    if request.user.is_staff:
+        messages.error(request, "Администраторы не могут удалять заявки.")
+        return redirect('catalog:profile')
+
+    if request.method == 'POST':
+        request_id = request.POST.get('request_id')
+        request_instance = get_object_or_404(InteriorDesignRequest, id=request_id, user=request.user)
+        request_instance.delete()
+        messages.success(request, "Заявка успешно удалена.")
+        return redirect('catalog:profile')
+
+    return render(request, 'catalog/delete_request.html', {'user_requests': user_requests})
