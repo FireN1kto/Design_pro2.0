@@ -191,3 +191,12 @@ main > div > div {
     background: black;
     color: white;
 }
+
+.counter {
+    font-weight: bold;
+    text-align: center;
+}
+
+.counter > span {
+    color: #32982F;
+}

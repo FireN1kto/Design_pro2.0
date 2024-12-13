@@ -16,6 +16,9 @@
             {% if user.is_authenticated %}
                 <div class="navigation">
                     <a href="{% url 'AppDesign:index' %}">Главная</a>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'admin:index' %}">Админка</a> 
+                    {% endif %}
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Профиль</a>
                     <div class="dropdown-menu">

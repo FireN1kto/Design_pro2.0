@@ -15,7 +15,16 @@ from django.shortcuts import get_object_or_404
 
 def index(request):
     requests = InteriorDesignRequest.objects.all()
-    return render(request, 'catalog/index.html', {'requests': requests})
+    if request.user.is_authenticated:
+        accepted_requests_count = InteriorDesignRequest.objects.filter(status='В процессе').count()
+    else:
+        accepted_requests_count = 0
+
+    context = {
+        'requests': requests,
+        'accepted_requests_count': accepted_requests_count,
+    }
+    return render(request, 'catalog/index.html', context)
 
 class BBLoginView(LoginView):
     template_name = 'catalog/login.html'

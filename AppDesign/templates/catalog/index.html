@@ -5,6 +5,7 @@
 
 {% block content %}
 <div>
+    <h4 class="counter">Количество заявок со статусом "принято в работу": <span>{{ accepted_requests_count }}</span></h4>
     {% for request in requests %}
         <div>
             <div class="request-card">

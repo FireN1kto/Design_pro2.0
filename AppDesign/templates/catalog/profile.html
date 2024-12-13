@@ -23,6 +23,7 @@
             <div class="request-card">
               <p class="request-header"><span>{{ request.name }}</span> </p>
               <p class="request-description"><span>Описание</span>: {{ request.project_description }}</p>
+              <p class="request-category"><span>Категория</span>: {{request.category.name}}</p>
               <p class="request-status"><span>Статус</span>: {{ request.status }}</p>
               <p class="request-date"><span>Дата создания</span>: {{ request.created_at }}</p>
               {% if request.is_urgent%}
