@@ -41,7 +41,7 @@ class InteriorDesignRequest(models.Model):
     project_description = models.TextField(verbose_name="Описание заявки")
     design_image = models.ImageField(upload_to='design_images/', validators=[validate_image], verbose_name="Фото помещения")
     created_at = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Новая', verbose_name="Статус")
     user = models.ForeignKey(AdvUser ,on_delete=models.CASCADE)
     is_urgent = models.BooleanField(default=False, verbose_name='Срочность')

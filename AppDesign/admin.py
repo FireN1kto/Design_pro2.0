@@ -11,6 +11,14 @@ class AdvUserAdmin(admin.ModelAdmin):
             return self.readonly_fields + ('email',)
         return self.readonly_fields
 
+
+class RequestInline(admin.TabularInline):
+    model = InteriorDesignRequest
+    extra = 0
+
+class CategoryAdmin(admin.ModelAdmin):
+    inlines = [RequestInline]
+
 admin.site.register(AdvUser, AdvUserAdmin)
 admin.site.register(InteriorDesignRequest)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
