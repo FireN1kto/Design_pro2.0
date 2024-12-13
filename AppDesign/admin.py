@@ -23,7 +23,16 @@ class InterDesignRequestAdmin(admin.ModelAdmin):
         if obj and obj.status in ['В процессе', 'Завершена']:
             form.base_fields['status'].disabled = True
 
+        if obj and obj.status !='Завершена':
+            form.base_fields['design_image'].disabled = True
+
         return form
+
+    def save_model(self, request, obj, form, change):
+        if obj.status == "Закончена":
+            form.base_fields['design_image'].disabled = False
+
+        super().save_model(request, obj, form, change)
 
 class RequestInline(admin.TabularInline):
     model = InteriorDesignRequest
