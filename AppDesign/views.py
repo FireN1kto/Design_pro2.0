@@ -14,11 +14,7 @@ from django.shortcuts import get_object_or_404
 
 
 def index(request):
-    status_filter = request.GET.get('status', None)
-    if status_filter:
-        requests = InteriorDesignRequest.objects.filter(status=status_filter)
-    else:
-        requests = InteriorDesignRequest.objects.all()
+    requests = InteriorDesignRequest.objects.filter(status='В процессе')
 
     if request.user.is_authenticated:
         accepted_requests_count = InteriorDesignRequest.objects.filter(status='В процессе').count()
@@ -44,8 +40,11 @@ class BBLogoutView(LoginRequiredMixin, LogoutView):
 
 @login_required
 def profile(request):
+    status_filter = request.GET.get('status', None)
     user_requests = InteriorDesignRequest.objects.filter(user=request.user)
-    return render(request, 'catalog/profile.html', {'user_requests': user_requests})
+    if status_filter:
+        user_requests = InteriorDesignRequest.objects.filter(status=status_filter)
+    return render(request, 'catalog/profile.html', {'user_requests': user_requests, 'status_filter': status_filter})
 
 class RegisterUserView(CreateView):
     model = AdvUser

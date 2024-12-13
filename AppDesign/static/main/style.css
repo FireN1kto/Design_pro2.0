@@ -208,8 +208,6 @@ main > div > div {
 }
 
 #status {
-    background: black;
-    color: #32982F;
     font-weight: bold;
     border-radius: 5px;
 }
