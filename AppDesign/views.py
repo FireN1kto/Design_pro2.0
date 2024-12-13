@@ -14,7 +14,12 @@ from django.shortcuts import get_object_or_404
 
 
 def index(request):
-    requests = InteriorDesignRequest.objects.all()
+    status_filter = request.GET.get('status', None)
+    if status_filter:
+        requests = InteriorDesignRequest.objects.filter(status=status_filter)
+    else:
+        requests = InteriorDesignRequest.objects.all()
+
     if request.user.is_authenticated:
         accepted_requests_count = InteriorDesignRequest.objects.filter(status='В процессе').count()
     else:

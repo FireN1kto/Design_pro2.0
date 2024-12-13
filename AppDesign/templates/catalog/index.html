@@ -6,6 +6,16 @@
 {% block content %}
 <div>
     <h4 class="counter">Количество заявок со статусом "принято в работу": <span>{{ accepted_requests_count }}</span></h4>
+    <form method="get" action="" class="form-poisk">
+        <label for="status">Фильтр по статусу:</label>
+        <select name="status" id="status" onchange="this.form.submit()">
+            <option value="">Все</option>
+            <option value="Новая" {% if selected_status == 'Новая' %}selected{% endif %}>Новая</option>
+            <option value="В процессе" {% if selected_status == 'В процессе' %}selected{% endif %}>В процессе</option>
+            <option value="Завершена" {% if selected_status == 'Завершена' %}selected{% endif %}>Завершена</option>
+        </select>
+        {% csrf_token %}
+    </form>
     {% for request in requests %}
         <div>
             <div class="request-card">

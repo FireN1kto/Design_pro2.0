@@ -200,3 +200,16 @@ main > div > div {
 .counter > span {
     color: #32982F;
 }
+
+.form-poisk {
+    margin-top: 3%;
+    font-weight: bold;
+    text-align: center;
+}
+
+#status {
+    background: black;
+    color: #32982F;
+    font-weight: bold;
+    border-radius: 5px;
+}
