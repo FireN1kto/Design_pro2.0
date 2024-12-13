@@ -25,7 +25,11 @@
               <p class="request-description"><span>Описание</span>: {{ request.project_description }}</p>
               <p class="request-status"><span>Статус</span>: {{ request.status }}</p>
               <p class="request-date"><span>Дата создания</span>: {{ request.created_at }}</p>
-              <p class="request-urgent"><span>Срочность</span>: {{ request.is_urgent }}</p>
+              {% if request.is_urgent%}
+                <p class="request-urgent">Эта заявка срочная!</p>
+              {% else %}
+                <p class="request-urgent">Данная заявка не срочная.</p>
+              {% endif %}
             </div>
             {% if request.design_image %}
                 <div class="request-image"><img src="{{request.design_image.url}}" alt="Изображение помещения"></div>

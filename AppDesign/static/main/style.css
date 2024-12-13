@@ -129,11 +129,9 @@ main > div > div {
 }
 
 .request-urgent {
-    padding-left: 20px;
-}
-
-.request-urgent > span {
     font-weight: bold;
+    color: #32982F;
+    padding-left: 20px;
 }
 
 .request-image > img {
