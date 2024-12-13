@@ -92,8 +92,11 @@ def delete_request(request):
     if request.method == 'POST':
         request_id = request.POST.get('request_id')
         request_instance = get_object_or_404(InteriorDesignRequest, id=request_id, user=request.user)
-        request_instance.delete()
-        messages.success(request, "Заявка успешно удалена.")
+        if request_instance.status == "Новая":
+            request_instance.delete()
+            messages.success(request, "Заявка успешно удалена.")
+        else:
+            messages.error(request, "Вы можете удалить только заявки со статусом 'Новая'.")
         return redirect('catalog:profile')
 
     return render(request, 'catalog/delete_request.html', {'user_requests': user_requests})
