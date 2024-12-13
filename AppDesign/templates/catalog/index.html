@@ -5,7 +5,7 @@
 
 {% block content %}
 <div>
-    <h4 class="counter">Количество заявок со статусом "принято в работу": <span>{{ accepted_requests_count }}</span></h4>
+    <h4 class="counter">Количество заявок со статусом "В процессе": <span>{{ accepted_requests_count }}</span></h4>
     {% for request in requests %}
         <div>
             <div class="request-card">
@@ -22,8 +22,9 @@
                     <p class="request-urgent">Данная заявка не срочная.</p>
                 {% endif %}
                 {% if request.status == 'В процессе' %}
-                    <p><span>Комментарий</span>: {{ request.comment }}</p>
+                    <p class="request-comment"><span>Комментарий</span>: {{ request.comment }}</p>
                 {% endif %}
+                <a href="{% url 'catalog:request_detail'  request.id  %}" class="go_detail"> Детали заявки</a>
             </div>
             {% if request.design_image %}
                 <div class="request-image"><img src="{{request.design_image.url}}" alt="Изображение помещения"></div>

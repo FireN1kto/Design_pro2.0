@@ -90,12 +90,12 @@ main > div > div {
     font-weight: bold;
     font-size: 20pt;
     margin-bottom: 3%;
-    padding-top: 20px;
-    padding-left: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .request-description {
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 .request-description > span {
@@ -103,7 +103,7 @@ main > div > div {
 }
 
 .request-category {
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 .request-category > span {
@@ -112,7 +112,7 @@ main > div > div {
 
 .request-status {
     font-style: italic;
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 .request-status > span {
@@ -125,13 +125,13 @@ main > div > div {
 }
 
 .request-date {
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 .request-urgent {
     font-weight: bold;
     color: #32982F;
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 .request-image > img {
@@ -218,6 +218,82 @@ main > div > div {
 }
 
 .request-comment {
-    padding: 20px;
+    margin-left: 20px;
     font-style: italic;
+}
+
+.go_detail {
+    margin-left: 20px;
+    background: black;
+    padding: 2%;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #32982F;
+    font-weight: bold;
+}
+
+.go_detail:hover {
+    background: #32982F;
+    color: black;
+    text-decoration: none;
+    box-shadow: inset -5px 10px 10px rgba(0,0,0,0.25);
+}
+
+.go_detail:active {
+    background: #32982F;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.buttons > a {
+    background: black;
+    padding: 1%;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #32982F;
+    font-weight: bold;
+}
+
+.buttons > a:hover {
+    background: #32982F;
+    color: black;
+    text-decoration: none;
+    box-shadow: inset -5px 10px 10px rgba(0,0,0,0.25);
+}
+
+.buttons > a:active {
+    background: black;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.back2 {
+    background: black;
+    padding: 1%;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #32982F;
+    font-weight: bold;
+    width: 10%;
+    text-align: center;
+    margin-left: 45%;
+}
+
+.back2:hover {
+    background: #32982F;
+    color: black;
+    text-decoration: none;
+    box-shadow: inset -5px 10px 10px rgba(0,0,0,0.25);
+}
+
+.back2:active {
+    background: black;
+    color: #FFFFFF;
+    text-decoration: none;
 }

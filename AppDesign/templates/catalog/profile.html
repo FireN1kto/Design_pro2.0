@@ -48,6 +48,7 @@
                   {% if request.status == 'В процессе' %}
                     <p class="request-comment"><span>Комментарий</span>: {{ request.comment }}</p>
                   {% endif %}
+                  <a href="{% url 'catalog:request_detail'  request.id  %}" class="go_detail"> Детали заявки</a>
                 </div>
                 {% if request.design_image %}
                     <div class="request-image"><img src="{{request.design_image.url}}" alt="Изображение помещения"></div>

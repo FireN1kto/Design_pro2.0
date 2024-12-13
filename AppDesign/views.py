@@ -103,3 +103,7 @@ def delete_request(request):
         return redirect('catalog:profile')
 
     return render(request, 'catalog/delete_request.html', {'user_requests': user_requests})
+
+def request_detail(request, request_id):
+    request_instance = get_object_or_404(InteriorDesignRequest, id=request_id)
+    return render(request, 'catalog/request_detail.html', {'request': request_instance})

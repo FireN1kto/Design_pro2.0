@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.dispatch import Signal
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 user_registrated = Signal()
 
@@ -45,7 +46,14 @@ class InteriorDesignRequest(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Новая', verbose_name="Статус")
     user = models.ForeignKey(AdvUser ,on_delete=models.CASCADE)
     is_urgent = models.BooleanField(default=False, verbose_name='Срочность')
-    comment = models.TextField(blank=True, null=True)
+    comment = models.TextField(blank=True, null=True, verbose_name ='Комментарий')
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0.00,
+        verbose_name="Цена заявки",
+        validators=[MinValueValidator(0)]
+    )
 
     def __str__(self):
-        return f"Заявка от {self.name}, Статус {self.status}"
+        return f"Заявка от {self.name}, Статус {self.status}, Цена: {self.price}"

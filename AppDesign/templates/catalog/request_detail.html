@@ -1,0 +1,28 @@
+{% extends "layout/basic.html" %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+{% block content %}
+    <h2>Детали заявки: {{ request.name }}</h2>
+    <p><span>Email:</span> {{ request.email }}</p>
+    <p><span>Телефон:</span> {{ request.phone }}</p>
+    <p><span>Описание:</span> {{ request.project_description }}</p>
+    <p><span>Статус:</span> {{ request.get_status_display }}</p>
+    <p><span>Срочность:</span> {{ request.is_urgent|yesno:"Срочная,Обычная" }}</p>
+
+    {% if request.design_image %}
+        <img src="{{ request.design_image.url }}" alt="Изображение проекта">
+    {% endif %}
+
+    <p><span>Создано:</span> {{ request.created_at }}</p>
+    {% if request.price %}
+        <p><span>Цена за заявку:</span> {{ request.price }}</p>
+        <div class="buttons">
+            <a href="{% url 'catalog:profile' %}" class="back">Назад</a>
+            <a href="#" class="pay">Оплатить заявку</a>
+        </div>
+    {% else %}
+        <a href="{% url 'catalog:profile' %}" class="back2">Назад</a>
+    {% endif %}
+{% endblock %}
