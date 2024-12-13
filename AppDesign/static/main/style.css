@@ -211,3 +211,13 @@ main > div > div {
     font-weight: bold;
     border-radius: 5px;
 }
+
+.request-comment > span {
+    font-weight: bold;
+    font-style: normal;
+}
+
+.request-comment {
+    padding: 20px;
+    font-style: italic;
+}

@@ -13,6 +13,10 @@ class AdvUserAdmin(admin.ModelAdmin):
 
 
 class InterDesignRequestAdmin(admin.ModelAdmin):
+    list_display = ('user', 'status', 'comment', 'created_at')
+
+    search_fields = ('user', 'comment')
+
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
 

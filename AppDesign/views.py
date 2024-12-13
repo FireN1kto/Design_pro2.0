@@ -75,6 +75,9 @@ def create_request(request):
             request_instance = form.save(commit=False)
             request_instance.user = request.user
             request_instance.category = form.cleaned_data['new_category'] or form.cleaned_data['category']
+            comment = form.cleaned_data.get('comment', '')
+            if comment:
+                request_instance.comment = comment
             request_instance.save()
             messages.success(request, 'Ваша заявка успешно отправлена!')
             return redirect('catalog:profile')

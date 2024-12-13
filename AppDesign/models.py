@@ -45,6 +45,7 @@ class InteriorDesignRequest(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Новая', verbose_name="Статус")
     user = models.ForeignKey(AdvUser ,on_delete=models.CASCADE)
     is_urgent = models.BooleanField(default=False, verbose_name='Срочность')
+    comment = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return f"Заявка от {self.name}, Статус {self.status}"

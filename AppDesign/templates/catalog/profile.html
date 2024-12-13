@@ -11,44 +11,51 @@
 {% else %}
   <p>Здравствуйте! </p>
 {% endif %}
- {% if messages %}
+{% if messages %}
     {% for message in messages %}
         <div class="alert alert-warning">{{ message }}</div>
     {% endfor %}
 {% endif %}
 <h3>Ваши заявки:</h3>
 <div>
-    <form method="get" action="" class="form-poisk">
-        <label for="status">Фильтр по статусу:</label>
-        <select name="status" id="status" onchange="this.form.submit()">
-            <option value="">Все</option>
-            <option value="Новая" {% if selected_status == 'Новая' %}selected{% endif %}>Новая</option>
-            <option value="В процессе" {% if selected_status == 'В процессе' %}selected{% endif %}>В процессе</option>
-            <option value="Завершена" {% if selected_status == 'Завершена' %}selected{% endif %}>Завершена</option>
-        </select>
-        {% csrf_token %}
-        <a href="{% url 'catalog:profile' %}" class="reset-button">Сбросить фильтр</a>
-    </form>
-    {% for request in user_requests %}
-        <div>
-            <div class="request-card">
-              <p class="request-header"><span>{{ request.name }}</span> </p>
-              <p class="request-description"><span>Описание</span>: {{ request.project_description }}</p>
-              <p class="request-category"><span>Категория</span>: {{request.category.name}}</p>
-              <p class="request-status"><span>Статус</span>: {{ request.status }}</p>
-              <p class="request-date"><span>Дата создания</span>: {{ request.created_at }}</p>
-              {% if request.is_urgent%}
-                <p class="request-urgent">Эта заявка срочная!</p>
-              {% else %}
-                <p class="request-urgent">Данная заявка не срочная.</p>
-              {% endif %}
+    {% if user.is_superuser %}
+        <h2>У вас не может быть заявок</h2>
+    {% else %}
+        <form method="get" action="" class="form-poisk">
+            <label for="status">Фильтр по статусу:</label>
+            <select name="status" id="status" onchange="this.form.submit()">
+                <option value="">Все</option>
+                <option value="Новая" {% if selected_status == 'Новая' %}selected{% endif %}>Новая</option>
+                <option value="В процессе" {% if selected_status == 'В процессе' %}selected{% endif %}>В процессе</option>
+                <option value="Завершена" {% if selected_status == 'Завершена' %}selected{% endif %}>Завершена</option>
+            </select>
+            {% csrf_token %}
+            <a href="{% url 'catalog:profile' %}" class="reset-button">Сбросить фильтр</a>
+        </form>
+        {% for request in user_requests %}
+            <div>
+                <div class="request-card">
+                  <p class="request-header"><span>{{ request.name }}</span> </p>
+                  <p class="request-description"><span>Описание</span>: {{ request.project_description }}</p>
+                  <p class="request-category"><span>Категория</span>: {{request.category.name}}</p>
+                  <p class="request-status"><span>Статус</span>: {{ request.status }}</p>
+                  <p class="request-date"><span>Дата создания</span>: {{ request.created_at }}</p>
+                  {% if request.is_urgent %}
+                    <p class="request-urgent">Эта заявка срочная!</p>
+                  {% else %}
+                    <p class="request-urgent">Данная заявка не срочная.</p>
+                  {% endif %}
+                  {% if request.status == 'В процессе' %}
+                    <p class="request-comment"><span>Комментарий</span>: {{ request.comment }}</p>
+                  {% endif %}
+                </div>
+                {% if request.design_image %}
+                    <div class="request-image"><img src="{{request.design_image.url}}" alt="Изображение помещения"></div>
+                {% endif %}
             </div>
-            {% if request.design_image %}
-                <div class="request-image"><img src="{{request.design_image.url}}" alt="Изображение помещения"></div>
-            {% endif %}
-        </div>
-    {% empty %}
-        <p>Заявок пока что нет.</p>
-    {% endfor %}
+        {% empty %}
+            <p>Заявок пока что нет.</p>
+        {% endfor %}
+    {% endif %}
 </div>
 {% endblock %}
